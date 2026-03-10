@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demagu Varun Reddy — Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #080f1e;
+  --navy2:      #0c1527;
+  --navy3:      #111e35;
+  --panel:      rgba(255,255,255,0.035);
+  --panel-hov:  rgba(255,255,255,0.06);
+  --blue:       #3b82f6;
+  --blue2:      #60a5fa;
+  --blue-dim:   rgba(59,130,246,0.12);
+  --blue-glow:  rgba(59,130,246,0.06);
+  --emerald:    #10b981;
+  --emerald-dim:rgba(16,185,129,0.12);
+  --amber:      #f59e0b;
+  --amber-dim:  rgba(245,158,11,0.12);
+  --rose:       #f43f5e;
+  --text:       #e2e8f0;
+  --text-2:     #94a3b8;
+  --text-3:     #475569;
+  --border:     rgba(255,255,255,0.07);
+  --border-2:   rgba(59,130,246,0.25);
+  --radius:     10px;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background:var(--navy); color:var(--text); font-family:'Outfit',sans-serif; font-weight:400; overflow-x:hidden; }
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--navy2); }
+::-webkit-scrollbar-thumb { background:var(--blue); border-radius:2px; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 40px; height:60px;
+  background:rgba(8,15,30,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-brand { display:flex; align-items:center; gap:10px; font-family:'Fira Code',monospace; font-size:12px; color:var(--blue2); letter-spacing:1px; }
+.nav-dot { width:8px; height:8px; background:var(--emerald); border-radius:50%; animation:pulse 2.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,.4)} 50%{opacity:.6;box-shadow:0 0 0 6px rgba(16,185,129,0)} }
+.nav-links { display:flex; gap:32px; list-style:none; }
+.nav-links a { font-size:13px; font-weight:500; color:var(--text-2); text-decoration:none; letter-spacing:.3px; transition:color .25s; }
+.nav-links a:hover { color:var(--blue2); }
+.nav-badge { display:flex; align-items:center; gap:8px; background:var(--emerald-dim); border:1px solid rgba(16,185,129,.25); padding:5px 14px; border-radius:100px; font-size:11px; font-family:'Fira Code',monospace; color:var(--emerald); letter-spacing:.5px; }
+
+/* HERO */
+#hero { min-height:100vh; padding:100px 40px 60px; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; position:relative; overflow:hidden; }
+.hero-grid { position:absolute; inset:0; pointer-events:none; background-image:linear-gradient(rgba(59,130,246,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.04) 1px,transparent 1px); background-size:48px 48px; }
+.blob { position:absolute; border-radius:50%; filter:blur(80px); pointer-events:none; opacity:.25; }
+.blob-1 { width:500px; height:500px; background:radial-gradient(circle,#3b82f6,transparent); top:-100px; right:-100px; }
+.blob-2 { width:400px; height:400px; background:radial-gradient(circle,#10b981,transparent); bottom:-100px; left:-100px; }
+.hero-left { position:relative; z-index:2; }
+.hero-eyebrow { display:inline-flex; align-items:center; gap:8px; background:var(--blue-dim); border:1px solid var(--border-2); padding:6px 16px; border-radius:100px; font-family:'Fira Code',monospace; font-size:11px; color:var(--blue2); letter-spacing:1px; margin-bottom:28px; }
+.hero-eyebrow::before { content:''; width:6px; height:6px; background:var(--blue); border-radius:50%; }
+h1.hero-name { font-size:clamp(44px,5vw,68px); font-weight:900; line-height:1.05; letter-spacing:-2px; margin-bottom:6px; color:var(--text); }
+h1.hero-name .last { color:var(--blue2); }
+.hero-title { font-size:clamp(16px,2vw,22px); font-weight:300; color:var(--text-2); letter-spacing:.5px; margin-bottom:24px; }
+.hero-bio { font-size:15px; line-height:1.85; color:var(--text-2); max-width:500px; margin-bottom:40px; }
+.hero-bio strong { color:var(--text); font-weight:600; }
+.hero-cta { display:flex; gap:14px; flex-wrap:wrap; }
+.btn { display:inline-flex; align-items:center; gap:8px; padding:12px 28px; border-radius:8px; font-size:14px; font-weight:600; text-decoration:none; transition:all .25s; cursor:pointer; border:none; font-family:'Outfit',sans-serif; }
+.btn-primary { background:var(--blue); color:#fff; box-shadow:0 0 24px rgba(59,130,246,.3); }
+.btn-primary:hover { background:var(--blue2); transform:translateY(-2px); box-shadow:0 8px 32px rgba(59,130,246,.4); }
+.btn-ghost { background:var(--panel); color:var(--text-2); border:1px solid var(--border); }
+.btn-ghost:hover { border-color:var(--blue); color:var(--blue2); transform:translateY(-2px); }
+.hero-kpis { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:48px; }
+.kpi-card { background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; position:relative; overflow:hidden; transition:border-color .3s,transform .3s; }
+.kpi-card:hover { border-color:var(--border-2); transform:translateY(-3px); }
+.kpi-card::before { content:''; position:absolute; bottom:0; left:0; height:2px; width:100%; }
+.kpi-card.blue::before { background:linear-gradient(90deg,var(--blue),transparent); }
+.kpi-card.green::before { background:linear-gradient(90deg,var(--emerald),transparent); }
+.kpi-card.amber::before { background:linear-gradient(90deg,var(--amber),transparent); }
+.kpi-val { font-size:28px; font-weight:800; line-height:1; margin-bottom:4px; }
+.kpi-card.blue .kpi-val { color:var(--blue2); }
+.kpi-card.green .kpi-val { color:var(--emerald); }
+.kpi-card.amber .kpi-val { color:var(--amber); }
+.kpi-lbl { font-size:11px; font-family:'Fira Code',monospace; color:var(--text-3); letter-spacing:1px; text-transform:uppercase; }
+
+/* HERO RIGHT — dashboard */
+.hero-right { position:relative; z-index:2; display:flex; flex-direction:column; gap:14px; }
+.dash-widget { background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.widget-header { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:1px solid var(--border); }
+.widget-title { font-size:12px; font-weight:600; color:var(--text-2); font-family:'Fira Code',monospace; letter-spacing:.5px; }
+.widget-badge { font-size:10px; font-family:'Fira Code',monospace; padding:3px 8px; border-radius:4px; }
+.widget-badge.up { background:var(--emerald-dim); color:var(--emerald); }
+.widget-badge.live { background:var(--blue-dim); color:var(--blue2); animation:badge-pulse 2s infinite; }
+@keyframes badge-pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+.line-chart { padding:16px 18px 14px; }
+.chart-svg { width:100%; height:80px; }
+.chart-line { fill:none; stroke:var(--blue); stroke-width:2; stroke-dasharray:400; stroke-dashoffset:400; animation:draw-line 2s .5s cubic-bezier(.4,0,.2,1) forwards; }
+.chart-line-2 { fill:none; stroke:var(--emerald); stroke-width:2; opacity:.7; stroke-dasharray:400; stroke-dashoffset:400; animation:draw-line 2s .8s cubic-bezier(.4,0,.2,1) forwards; }
+.chart-area { fill:url(#areaGrad); opacity:0; animation:fade-area 1s 2s forwards; }
+@keyframes draw-line { to { stroke-dashoffset:0; } }
+@keyframes fade-area { to { opacity:.4; } }
+.bar-chart { padding:16px 18px; display:flex; align-items:flex-end; gap:8px; height:90px; }
+.bar-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; }
+.bar-fill { width:100%; border-radius:4px 4px 0 0; background:linear-gradient(180deg,var(--blue),rgba(59,130,246,.4)); transform:scaleY(0); transform-origin:bottom; animation:bar-grow .8s forwards; }
+.bar-lbl { font-size:9px; color:var(--text-3); font-family:'Fira Code',monospace; }
+@keyframes bar-grow { to { transform:scaleY(1); } }
+.donut-widget { display:flex; align-items:center; gap:20px; padding:18px; }
+.donut-circle { fill:none; stroke:var(--navy3); stroke-width:12; }
+.donut-arc { fill:none; stroke-width:12; stroke-linecap:round; stroke-dasharray:0 251; animation:donut-fill 1.5s 1s ease forwards; }
+@keyframes donut-fill { to { stroke-dasharray:226 251; } }
+.donut-legend { display:flex; flex-direction:column; gap:8px; }
+.legend-item { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text-2); }
+.legend-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+/* SECTIONS */
+section { padding:90px 40px; position:relative; }
+.section-label { display:flex; align-items:center; gap:12px; margin-bottom:48px; }
+.s-tag { font-family:'Fira Code',monospace; font-size:11px; color:var(--blue2); letter-spacing:2px; text-transform:uppercase; }
+.s-line { height:1px; background:var(--border); flex:1; max-width:48px; }
+.s-title { font-size:clamp(28px,3.5vw,44px); font-weight:800; letter-spacing:-1px; color:var(--text); }
+.s-rule { flex:1; height:1px; background:var(--border); }
+.reveal { opacity:0; transform:translateY(32px); transition:opacity .7s ease,transform .7s ease; }
+.reveal.in { opacity:1; transform:none; }
+
+/* ABOUT */
+#about { background:var(--navy2); }
+.about-grid { display:grid; grid-template-columns:1.4fr 1fr; gap:64px; align-items:start; }
+.about-text p { font-size:15px; line-height:1.9; color:var(--text-2); margin-bottom:18px; }
+.about-text p strong { color:var(--text); font-weight:600; }
+.tools-grid { display:flex; flex-wrap:wrap; gap:10px; margin-top:32px; }
+.tool-pill { display:inline-flex; align-items:center; gap:7px; padding:8px 14px; border-radius:8px; border:1px solid var(--border); font-size:12px; font-weight:500; color:var(--text-2); background:var(--panel); transition:all .2s; }
+.tool-pill:hover { border-color:var(--blue); color:var(--blue2); background:var(--blue-dim); }
+.about-cards { display:flex; flex-direction:column; gap:14px; }
+.info-card { background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px; transition:all .3s; }
+.info-card:hover { border-color:var(--border-2); background:var(--panel-hov); }
+.info-card-icon { font-size:22px; margin-bottom:10px; }
+.info-card-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.info-card-body { font-size:12px; color:var(--text-2); line-height:1.7; font-family:'Fira Code',monospace; }
+
+/* EXPERIENCE */
+#experience { background:var(--navy); }
+.timeline { position:relative; padding-left:32px; }
+.timeline::before { content:''; position:absolute; left:0; top:8px; bottom:8px; width:1px; background:linear-gradient(180deg,var(--blue),transparent); }
+.tl-item { position:relative; margin-bottom:48px; }
+.tl-item:last-child { margin-bottom:0; }
+.tl-dot { position:absolute; left:-37px; top:6px; width:12px; height:12px; border-radius:50%; background:var(--blue); border:2px solid var(--navy); box-shadow:0 0 0 3px rgba(59,130,246,.25); }
+.tl-card { background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:36px; transition:border-color .3s; }
+.tl-card:hover { border-color:var(--border-2); }
+.tl-meta { display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
+.tl-company { font-size:11px; font-family:'Fira Code',monospace; color:var(--blue2); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:4px; }
+.tl-role { font-size:24px; font-weight:800; color:var(--text); letter-spacing:-.5px; }
+.tl-period { background:var(--blue-dim); border:1px solid var(--border-2); padding:5px 14px; border-radius:100px; font-size:11px; font-family:'Fira Code',monospace; color:var(--blue2); white-space:nowrap; }
+.impact-row { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:28px; }
+.impact-box { background:var(--navy3); border:1px solid var(--border); border-radius:8px; padding:16px; text-align:center; }
+.impact-num { font-size:26px; font-weight:800; color:var(--blue2); line-height:1; margin-bottom:4px; }
+.impact-num.green { color:var(--emerald); }
+.impact-num.amber { color:var(--amber); }
+.impact-lbl { font-size:10px; color:var(--text-3); font-family:'Fira Code',monospace; letter-spacing:1px; text-transform:uppercase; }
+.resp-list { list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.resp-list li { font-size:13.5px; line-height:1.7; color:var(--text-2); padding-left:18px; position:relative; }
+.resp-list li::before { content:'▸'; position:absolute; left:0; color:var(--blue); }
+
+/* SKILLS */
+#skills { background:var(--navy2); }
+.skills-layout { display:grid; grid-template-columns:1.2fr 1fr; gap:24px; }
+.skill-panel { background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:16px; }
+.skill-panel-header { padding:16px 22px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+.panel-icon { width:28px; height:28px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:14px; }
+.panel-icon.blue { background:var(--blue-dim); }
+.panel-icon.green { background:var(--emerald-dim); }
+.panel-icon.amber { background:var(--amber-dim); }
+.panel-title { font-size:13px; font-weight:700; color:var(--text); }
+.panel-sub { font-size:11px; color:var(--text-3); font-family:'Fira Code',monospace; margin-left:auto; }
+.skill-bars { padding:22px; display:flex; flex-direction:column; gap:16px; }
+.sbar-top { display:flex; justify-content:space-between; margin-bottom:8px; }
+.sbar-name { font-size:13px; font-weight:500; color:var(--text); }
+.sbar-pct { font-size:12px; font-family:'Fira Code',monospace; color:var(--blue2); }
+.sbar-track { height:6px; background:var(--navy3); border-radius:3px; overflow:hidden; }
+.sbar-fill { height:100%; border-radius:3px; width:0%; transition:width 1.4s cubic-bezier(.4,0,.2,1); }
+.sbar-fill.blue { background:linear-gradient(90deg,var(--blue),var(--blue2)); }
+.sbar-fill.green { background:linear-gradient(90deg,var(--emerald),#34d399); }
+.sbar-fill.amber { background:linear-gradient(90deg,var(--amber),#fbbf24); }
+.tag-panels { display:flex; flex-direction:column; gap:14px; }
+.tag-panel { background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:20px 22px; }
+.tag-panel-title { font-size:11px; font-family:'Fira Code',monospace; color:var(--text-3); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+.tag-panel-title::after { content:''; flex:1; height:1px; background:var(--border); }
+.tag-cloud { display:flex; flex-wrap:wrap; gap:8px; }
+.tag { padding:5px 12px; border-radius:6px; font-size:12px; font-weight:500; border:1px solid var(--border); color:var(--text-2); background:var(--navy3); transition:all .2s; cursor:default; }
+.tag:hover { transform:translateY(-1px); }
+.tag.blue:hover { border-color:var(--blue); color:var(--blue2); background:var(--blue-dim); }
+.tag.green:hover { border-color:var(--emerald); color:var(--emerald); background:var(--emerald-dim); }
+.tag.amber:hover { border-color:var(--amber); color:var(--amber); background:var(--amber-dim); }
+
+/* PROJECTS */
+#projects { background:var(--navy); }
+.projects-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+.project-card { background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:border-color .3s,transform .3s; }
+.project-card:hover { border-color:var(--border-2); transform:translateY(-4px); }
+.project-preview { height:160px; background:var(--navy3); padding:16px; position:relative; overflow:hidden; border-bottom:1px solid var(--border); display:flex; gap:10px; }
+.preview-kpi { background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:6px; padding:10px 12px; flex:1; }
+.prev-num { font-size:18px; font-weight:800; line-height:1; margin-bottom:2px; }
+.prev-lbl { font-size:9px; color:var(--text-3); font-family:'Fira Code',monospace; }
+.preview-chart { flex:1; background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+.prev-bars { display:flex; align-items:flex-end; gap:4px; padding:8px; height:100%; }
+.prev-bar { flex:1; border-radius:3px 3px 0 0; min-height:8px; }
+.project-body { padding:24px; }
+.project-tag { font-size:10px; font-family:'Fira Code',monospace; color:var(--blue2); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px; display:block; }
+.project-name { font-size:19px; font-weight:800; color:var(--text); margin-bottom:10px; letter-spacing:-.3px; }
+.project-desc { font-size:13.5px; line-height:1.8; color:var(--text-2); margin-bottom:20px; }
+.project-chips { display:flex; flex-wrap:wrap; gap:8px; }
+.chip { padding:4px 11px; border-radius:6px; font-size:11px; font-weight:500; font-family:'Fira Code',monospace; }
+.chip.blue { background:var(--blue-dim); color:var(--blue2); border:1px solid rgba(59,130,246,.2); }
+.chip.green { background:var(--emerald-dim); color:var(--emerald); border:1px solid rgba(16,185,129,.2); }
+.chip.amber { background:var(--amber-dim); color:var(--amber); border:1px solid rgba(245,158,11,.2); }
+
+/* CERTS */
+#certs { background:var(--navy2); }
+.certs-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:24px; }
+.cert-card { background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:28px 24px; text-align:center; transition:all .3s; text-decoration:none; display:block; }
+.cert-card:hover { border-color:var(--border-2); transform:translateY(-4px); background:var(--panel-hov); }
+.cert-logo { width:54px; height:54px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-family:'Fira Code',monospace; font-size:14px; font-weight:700; margin:0 auto 16px; }
+.cert-logo.cisco { background:var(--blue-dim); color:var(--blue2); border:1px solid var(--border-2); }
+.cert-logo.ms { background:var(--amber-dim); color:var(--amber); border:1px solid rgba(245,158,11,.25); }
+.cert-logo.gl { background:var(--emerald-dim); color:var(--emerald); border:1px solid rgba(16,185,129,.25); }
+.cert-name { font-size:15px; font-weight:700; color:var(--text); margin-bottom:5px; }
+.cert-issuer { font-size:11px; color:var(--text-3); font-family:'Fira Code',monospace; }
+.ach-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+.ach-card { background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:20px 24px; display:flex; align-items:center; gap:16px; transition:all .3s; }
+.ach-card:hover { border-color:var(--amber); background:var(--amber-dim); }
+.ach-icon { font-size:28px; flex-shrink:0; }
+.ach-name { font-size:15px; font-weight:700; color:var(--text); margin-bottom:3px; }
+.ach-sub { font-size:11px; color:var(--text-3); font-family:'Fira Code',monospace; }
+
+/* CONTACT */
+#contact { background:var(--navy); text-align:center; padding:100px 40px 80px; }
+.contact-pre { font-family:'Fira Code',monospace; font-size:12px; color:var(--blue2); letter-spacing:2px; text-transform:uppercase; margin-bottom:20px; display:block; }
+.contact-h { font-size:clamp(36px,5vw,64px); font-weight:900; letter-spacing:-2px; line-height:1.05; margin-bottom:18px; }
+.contact-h .grad { background:linear-gradient(135deg,var(--blue2),var(--emerald)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.contact-p { font-size:16px; color:var(--text-2); max-width:460px; margin:0 auto 48px; line-height:1.8; }
+.contact-links { display:flex; justify-content:center; flex-wrap:wrap; gap:14px; margin-bottom:52px; }
+.c-link { display:inline-flex; align-items:center; gap:9px; padding:12px 22px; border-radius:10px; border:1px solid var(--border); font-size:13px; font-weight:600; text-decoration:none; color:var(--text-2); background:var(--panel); transition:all .25s; }
+.c-link:hover { transform:translateY(-3px); }
+.c-link.github:hover { border-color:#6e40c9; color:#a78bfa; background:rgba(110,64,201,.1); }
+.c-link.linkedin:hover { border-color:#0a66c2; color:#60a5fa; background:rgba(10,102,194,.1); }
+.c-link.hrank:hover { border-color:#00ea64; color:#10b981; background:var(--emerald-dim); }
+.c-link.credly:hover { border-color:var(--amber); color:var(--amber); background:var(--amber-dim); }
+.c-link.email:hover { border-color:var(--blue); color:var(--blue2); background:var(--blue-dim); }
+.c-link svg { width:16px; height:16px; fill:currentColor; }
+.contact-email { font-size:clamp(14px,2.5vw,22px); font-weight:500; color:var(--text-3); }
+.contact-email a { color:var(--blue2); text-decoration:none; transition:color .2s; }
+.contact-email a:hover { color:var(--text); }
+
+/* FOOTER */
+footer { background:var(--navy2); border-top:1px solid var(--border); padding:24px 40px; display:flex; align-items:center; justify-content:space-between; }
+.footer-l { font-size:12px; color:var(--text-3); font-family:'Fira Code',monospace; letter-spacing:.5px; }
+.footer-r { font-size:12px; color:var(--text-3); font-family:'Fira Code',monospace; }
+.footer-r span { color:var(--blue2); }
+
+/* RESPONSIVE */
+@media(max-width:960px) {
+  #hero { grid-template-columns:1fr; padding-top:90px; }
+  .hero-right { display:none; }
+  .about-grid { grid-template-columns:1fr; }
+  .impact-row { grid-template-columns:repeat(3,1fr); }
+  .resp-list { grid-template-columns:1fr; }
+  .skills-layout { grid-template-columns:1fr; }
+  .projects-grid { grid-template-columns:1fr; }
+  .certs-grid { grid-template-columns:1fr; }
+  .ach-grid { grid-template-columns:1fr; }
+  nav { padding:0 20px; }
+  .nav-links { display:none; }
+  section { padding:70px 24px; }
+  footer { padding:20px 24px; flex-direction:column; gap:8px; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-dot"></div>
+    varun.analytics
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certs">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-badge">
+    <div style="width:6px;height:6px;background:var(--emerald);border-radius:50%;"></div>
+    Open to Opportunities
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">Data Analyst · BI Developer · Automation</div>
+    <h1 class="hero-name">Demagu<br><span class="last">Varun Reddy</span></h1>
+    <p class="hero-title">Turning raw data into decisions that matter</p>
+    <p class="hero-bio">
+      2.5+ years building <strong>KPI dashboards, ETL pipelines &amp; automated reporting</strong> at Mahindra Comviva. Skilled in SQL, Python and Power BI — transforming high-volume, messy data into clean, boardroom-ready insights.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Let's Connect →</a>
+      <a href="#projects" class="btn btn-ghost">View Projects</a>
+    </div>
+    <div class="hero-kpis">
+      <div class="kpi-card blue">
+        <div class="kpi-val" data-count="2.5" data-suffix="yr">0yr</div>
+        <div class="kpi-lbl">Experience</div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-val" data-count="50" data-suffix="%">0%</div>
+        <div class="kpi-lbl">Effort Saved</div>
+      </div>
+      <div class="kpi-card amber">
+        <div class="kpi-val" data-count="10" data-suffix="k+">0k+</div>
+        <div class="kpi-lbl">Records Handled</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard preview panel -->
+  <div class="hero-right">
+    <div class="dash-widget">
+      <div class="widget-header">
+        <div class="widget-title">performance_metrics.sql</div>
+        <div class="widget-badge live">● LIVE</div>
+      </div>
+      <div class="line-chart">
+        <svg class="chart-svg" viewBox="0 0 380 80" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3b82f6" stop-opacity=".4"/>
+              <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path class="chart-area" d="M0,60 C40,50 80,35 120,30 S200,18 240,22 S320,28 380,15 V80 H0Z"/>
+          <path class="chart-line" d="M0,60 C40,50 80,35 120,30 S200,18 240,22 S320,28 380,15"/>
+          <path class="chart-line-2" d="M0,72 C40,68 80,60 120,58 S200,48 240,50 S320,44 380,38"/>
+        </svg>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;">
+      <div class="dash-widget">
+        <div class="widget-header">
+          <div class="widget-title">monthly_kpis</div>
+          <div class="widget-badge up">↑ +12.4%</div>
+        </div>
+        <div class="bar-chart">
+          <div class="bar-col"><div class="bar-fill" style="height:42px;animation-delay:.1s"></div><div class="bar-lbl">JAN</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:58px;animation-delay:.2s"></div><div class="bar-lbl">FEB</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:50px;animation-delay:.3s;background:linear-gradient(180deg,var(--emerald),rgba(16,185,129,.4))"></div><div class="bar-lbl">MAR</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:70px;animation-delay:.4s"></div><div class="bar-lbl">APR</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:62px;animation-delay:.5s;background:linear-gradient(180deg,var(--amber),rgba(245,158,11,.4))"></div><div class="bar-lbl">MAY</div></div>
+          <div class="bar-col"><div class="bar-fill" style="height:78px;animation-delay:.6s"></div><div class="bar-lbl">JUN</div></div>
+        </div>
+      </div>
+      <div class="dash-widget">
+        <div class="widget-header"><div class="widget-title">routing_eff</div></div>
+        <div class="donut-widget">
+          <svg width="72" height="72" viewBox="0 0 80 80">
+            <circle class="donut-circle" cx="40" cy="40" r="30"/>
+            <circle class="donut-arc" cx="40" cy="40" r="30" stroke="#3b82f6" transform="rotate(-90 40 40)"/>
+            <text x="40" y="44" text-anchor="middle" fill="#60a5fa" font-size="13" font-weight="800" font-family="Outfit">90%</text>
+          </svg>
+          <div class="donut-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Routed</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--navy3)"></div>Pending</div>
+            <div class="legend-item" style="font-size:10px;color:var(--text-3);font-family:'Fira Code',monospace;">10k+ msgs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-widget">
+      <div class="widget-header">
+        <div class="widget-title">automation_script.py</div>
+        <div class="widget-badge up">✓ Saved 50% effort</div>
+      </div>
+      <div style="padding:14px 18px;font-family:'Fira Code',monospace;font-size:11px;line-height:1.8;color:var(--text-3)">
+        <span style="color:#7c3aed">def </span><span style="color:var(--blue2)">generate_kpi_report</span><span style="color:var(--text-2)">(df, period):</span><br>
+        &nbsp;&nbsp;<span style="color:var(--text-3)"># Auto-scheduled via cron | runs daily 06:00</span><br>
+        &nbsp;&nbsp;<span style="color:var(--text-2)">metrics = df</span><span style="color:var(--amber)">.groupby</span><span style="color:var(--text-2)">(period)</span><span style="color:var(--amber)">.agg</span><span style="color:var(--text-2)">(kpis)</span><br>
+        &nbsp;&nbsp;<span style="color:var(--text-2)">report</span><span style="color:var(--emerald)">.send</span><span style="color:var(--text-2)">(metrics, stakeholders)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label reveal">
+    <span class="s-tag">01 // About</span>
+    <div class="s-line"></div>
+    <h2 class="s-title">Who I Am</h2>
+    <div class="s-rule"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a <strong>Data Analyst at Mahindra Comviva</strong> with 2.5 years of experience in analytics, business intelligence, and process automation. I work across the full data lifecycle — from raw ingestion and ETL design to dashboard delivery and stakeholder reporting.</p>
+      <p>My core strength is <strong>making data tell a clear story</strong>. Whether that's a KPI dashboard that updates in real-time, a Python script that replaces hours of manual work, or an RFM model that segments customers into actionable cohorts — I build analytics that drive real decisions.</p>
+      <p>B.E. in Computer Science from <strong>Mallareddy Engineering College (2023)</strong>, with certifications in Python (Cisco), Power BI (Udemy), and MySQL (Great Learning).</p>
+      <div class="tools-grid">
+        <div class="tool-pill">🗄️ SQL / MySQL</div>
+        <div class="tool-pill">🐍 Python</div>
+        <div class="tool-pill">📊 Power BI</div>
+        <div class="tool-pill">☁️ AWS</div>
+        <div class="tool-pill">🐧 Linux</div>
+        <div class="tool-pill">📈 DAX</div>
+        <div class="tool-pill">🔁 ETL</div>
+        <div class="tool-pill">🧮 Excel</div>
+        <div class="tool-pill">📦 Pandas</div>
+        <div class="tool-pill">🔀 Git</div>
+      </div>
+    </div>
+    <div class="about-cards reveal">
+      <div class="info-card">
+        <div class="info-card-icon">🎓</div>
+        <div class="info-card-title">Education</div>
+        <div class="info-card-body">Mallareddy Engineering College<br>B.E. Computer Science — 2019–2023<br><span style="color:var(--blue2)">Hyderabad, Telangana</span></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">💼</div>
+        <div class="info-card-title">Current Role</div>
+        <div class="info-card-body">Data Analyst @ Mahindra Comviva<br>Bangalore · Aug 2023 – Present<br><span style="color:var(--emerald)">Full-time · On-site</span></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">📍</div>
+        <div class="info-card-title">Location &amp; Contact</div>
+        <div class="info-card-body">Hyderabad / Bangalore, India<br>demaguvarunreddy511@gmail.com<br><span style="color:var(--blue2)">+91 9697200555</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label reveal">
+    <span class="s-tag">02 // Experience</span>
+    <div class="s-line"></div>
+    <h2 class="s-title">Work History</h2>
+    <div class="s-rule"></div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-meta">
+          <div>
+            <div class="tl-company">↳ Mahindra Comviva · Bangalore</div>
+            <div class="tl-role">Data Analyst</div>
+          </div>
+          <div class="tl-period">Aug 2023 — Present</div>
+        </div>
+        <div class="impact-row">
+          <div class="impact-box"><div class="impact-num green" data-count="50" data-suffix="%">0%</div><div class="impact-lbl">Effort Reduced</div></div>
+          <div class="impact-box"><div class="impact-num" data-count="10" data-suffix="k+">0k+</div><div class="impact-lbl">Records Daily</div></div>
+          <div class="impact-box"><div class="impact-num amber">100%</div><div class="impact-lbl">Report Accuracy</div></div>
+        </div>
+        <ul class="resp-list">
+          <li>Developed and optimized MySQL datasets for high-volume telecom messaging systems, preparing data via ETL workflows across 10,000+ records daily.</li>
+          <li>Automated recurring performance and business reports using Python, reducing manual reporting effort by 50%.</li>
+          <li>Built and maintained internal KPI tracking dashboards to monitor system load and routing efficiency.</li>
+          <li>Supported analytics workflows using Linux-based automation (cron jobs) for monitoring and reporting reliability.</li>
+          <li>Published validated datasets for downstream reporting, ensuring data quality and consistency at scale.</li>
+          <li>Collaborated with cross-functional teams to diagnose performance bottlenecks and improve system efficiency.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label reveal">
+    <span class="s-tag">03 // Skills</span>
+    <div class="s-line"></div>
+    <h2 class="s-title">Technical Arsenal</h2>
+    <div class="s-rule"></div>
+  </div>
+  <div class="skills-layout">
+    <div>
+      <div class="skill-panel reveal">
+        <div class="skill-panel-header">
+          <div class="panel-icon blue">🗄️</div>
+          <div class="panel-title">Data &amp; Database</div>
+          <div class="panel-sub">proficiency</div>
+        </div>
+        <div class="skill-bars">
+          <div class="sbar-item"><div class="sbar-top"><span class="sbar-name">SQL / MySQL</span><span class="sbar-pct">95%</span></div><div class="sbar-track"><div class="sbar-fill blue" data-w="95"></div></div></div>
+          <div class="sbar-item"><div class="sbar-top"><span class="sbar-name">ETL &amp; Data Modeling</span><span class="sbar-pct">88%</span></div><div class="sbar-track"><div class="sbar-fill blue" data-w="88"></div></div></div>
+          <div class="sbar-item"><div class="sbar-top"><span class="sbar-name">Data Cleaning &amp; Validation</span><span class="sbar-pct">93%</span></div><div class="sbar-track"><div class="sbar-fill blue" data-w="93"></div></div></div>
+          <div class="sbar-item"><div class="sbar-top"><span class="sbar-name">NoSQL (Document-based)</span><span class="sbar-pct">72%</span></div><div class="sbar-track"><div class="sbar-fill blue" data-w="72"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-panel reveal">
+        <div class="skill-panel-header">
+          <div class="panel-icon green">📊</div>
+          <div class="panel-title">BI &amp; Visualization</div>
+          <div class="panel-sub">proficiency</div>
+        </div>
+        <div class="skill-bars">
+          <div class="sbar-item"><div class="sbar-top"><span class="sbar-name">Power BI / DAX</span><span class="sbar-pct">90%</span></div><div class="sbar-track"><div class="sbar-fill green" data-w="90"></div></div></div>
+          <div class="sbar-item"><div class="sbar-top"><span class="sbar-name">Power Query</span><span class="sbar-pct">85%</span></div><div class="sbar-track"><div class="sbar-fill green" data-w="85"></div></div></div>
+          <div class="sbar-item"><div class="sbar-top"><span class="sbar-name">Microsoft Excel (Advanced)</span><span class="sbar-pct">88%</span></div><div class="sbar-track"><div class="sbar-fill green" data-w="88"></div></div></div>
+          <div class="sbar-item"><div class="sbar-top"><span class="sbar-name">Matplotlib / Seaborn</span><span class="sbar-pct">78%</span></div><div class="sbar-track"><div class="sbar-fill green" data-w="78"></div></div></div>
+        </div>
+      </div>
+      <div class="skill-panel reveal">
+        <div class="skill-panel-header">
+          <div class="panel-icon amber">🐍</div>
+          <div class="panel-title">Programming &amp; Cloud</div>
+          <div class="panel-sub">proficiency</div>
+        </div>
+        <div class="skill-bars">
+          <div class="sbar-item"><div class="sbar-top"><span class="sbar-name">Python (Pandas, NumPy)</span><span class="sbar-pct">85%</span></div><div class="sbar-track"><div class="sbar-fill amber" data-w="85"></div></div></div>
+          <div class="sbar-item"><div class="sbar-top"><span class="sbar-name">Report Automation</span><span class="sbar-pct">90%</span></div><div class="sbar-track"><div class="sbar-fill amber" data-w="90"></div></div></div>
+          <div class="sbar-item"><div class="sbar-top"><span class="sbar-name">AWS (S3, Glue, Redshift)</span><span class="sbar-pct">70%</span></div><div class="sbar-track"><div class="sbar-fill amber" data-w="70"></div></div></div>
+          <div class="sbar-item"><div class="sbar-top"><span class="sbar-name">Linux / Shell / Cron</span><span class="sbar-pct">75%</span></div><div class="sbar-track"><div class="sbar-fill amber" data-w="75"></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tag-panels reveal">
+      <div class="tag-panel">
+        <div class="tag-panel-title">Analytics Skills</div>
+        <div class="tag-cloud">
+          <span class="tag blue">KPI Reporting</span>
+          <span class="tag blue">Data Modeling</span>
+          <span class="tag blue">Dashboard Automation</span>
+          <span class="tag blue">Statistical Analysis</span>
+          <span class="tag blue">RFM Segmentation</span>
+          <span class="tag blue">Business Analysis</span>
+          <span class="tag blue">EDA</span>
+          <span class="tag blue">Performance Analytics</span>
+        </div>
+      </div>
+      <div class="tag-panel">
+        <div class="tag-panel-title">Tools &amp; Platforms</div>
+        <div class="tag-cloud">
+          <span class="tag green">Power BI</span>
+          <span class="tag green">MySQL Workbench</span>
+          <span class="tag green">AWS QuickSight</span>
+          <span class="tag green">MS Excel</span>
+          <span class="tag green">Git / GitHub</span>
+          <span class="tag green">Linux Terminal</span>
+          <span class="tag green">AWS Glue</span>
+          <span class="tag green">Amazon Redshift</span>
+        </div>
+      </div>
+      <div class="tag-panel">
+        <div class="tag-panel-title">Soft Skills</div>
+        <div class="tag-cloud">
+          <span class="tag amber">Data Storytelling</span>
+          <span class="tag amber">Problem Solving</span>
+          <span class="tag amber">Stakeholder Communication</span>
+          <span class="tag amber">Analytical Thinking</span>
+          <span class="tag amber">Cross-functional Collaboration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label reveal">
+    <span class="s-tag">04 // Projects</span>
+    <div class="s-line"></div>
+    <h2 class="s-title">Featured Work</h2>
+    <div class="s-rule"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-preview">
+        <div style="width:120px;flex-shrink:0;display:flex;flex-direction:column;gap:8px;">
+          <div class="preview-kpi"><div class="prev-num" style="color:var(--blue2)">$2.4M</div><div class="prev-lbl">Total Revenue</div></div>
+          <div class="preview-kpi"><div class="prev-num" style="color:var(--emerald)">3,812</div><div class="prev-lbl">Customers</div></div>
+          <div class="preview-kpi"><div class="prev-num" style="color:var(--amber)">87%</div><div class="prev-lbl">Retention</div></div>
+        </div>
+        <div class="preview-chart" style="flex:1;">
+          <div class="prev-bars">
+            <div class="prev-bar" style="height:55%;background:var(--blue);opacity:.5"></div>
+            <div class="prev-bar" style="height:70%;background:var(--blue);opacity:.6"></div>
+            <div class="prev-bar" style="height:45%;background:var(--blue);opacity:.5"></div>
+            <div class="prev-bar" style="height:85%;background:var(--emerald);opacity:.7"></div>
+            <div class="prev-bar" style="height:60%;background:var(--blue);opacity:.5"></div>
+            <div class="prev-bar" style="height:95%;background:var(--blue);opacity:.8"></div>
+            <div class="prev-bar" style="height:75%;background:var(--amber);opacity:.6"></div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <span class="project-tag">Customer Analytics · Revenue Intelligence</span>
+        <div class="project-name">Customer &amp; Revenue Analytics Dashboard</div>
+        <div class="project-desc">End-to-end analytics solution using RFM-based segmentation to identify high-value customers, churn risks, and revenue growth opportunities. Full pipeline from SQL extraction to Power BI delivery.</div>
+        <div class="project-chips">
+          <span class="chip blue">SQL</span>
+          <span class="chip blue">Python (Pandas)</span>
+          <span class="chip green">Power BI</span>
+          <span class="chip amber">RFM Segmentation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-preview">
+        <div style="width:120px;flex-shrink:0;display:flex;flex-direction:column;gap:8px;">
+          <div class="preview-kpi"><div class="prev-num" style="color:var(--blue2)">25k+</div><div class="prev-lbl">Records</div></div>
+          <div class="preview-kpi"><div class="prev-num" style="color:var(--emerald)">+18%</div><div class="prev-lbl">Sales Growth</div></div>
+          <div class="preview-kpi"><div class="prev-num" style="color:var(--amber)">6</div><div class="prev-lbl">Regions</div></div>
+        </div>
+        <div class="preview-chart" style="flex:1;">
+          <div style="padding:10px;height:100%;display:flex;flex-direction:column;gap:6px;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:6px;font-size:9px;color:var(--text-3);font-family:'Fira Code',monospace;"><div style="width:50%;height:6px;background:var(--blue);border-radius:3px;opacity:.7"></div>NA</div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:9px;color:var(--text-3);font-family:'Fira Code',monospace;"><div style="width:38%;height:6px;background:var(--emerald);border-radius:3px;opacity:.7"></div>EU</div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:9px;color:var(--text-3);font-family:'Fira Code',monospace;"><div style="width:28%;height:6px;background:var(--amber);border-radius:3px;opacity:.7"></div>APAC</div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:9px;color:var(--text-3);font-family:'Fira Code',monospace;"><div style="width:18%;height:6px;background:var(--rose);border-radius:3px;opacity:.7"></div>AU</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <span class="project-tag">Sales Intelligence · Business Dashboard</span>
+        <div class="project-name">Adventure Works Business Dashboard</div>
+        <div class="project-desc">Interactive Power BI dashboard analyzing sales KPIs and regional performance across 25,000+ records. Dynamic filters, drill-through pages, and trend analysis for executive decision-making.</div>
+        <div class="project-chips">
+          <span class="chip green">Power BI</span>
+          <span class="chip green">DAX</span>
+          <span class="chip green">Power Query</span>
+          <span class="chip amber">MS Excel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="section-label reveal">
+    <span class="s-tag">05 // Certifications</span>
+    <div class="s-line"></div>
+    <h2 class="s-title">Credentials</h2>
+    <div class="s-rule"></div>
+  </div>
+  <div class="certs-grid reveal">
+    <a href="https://drive.google.com/file/d/1W7e9yJ0MvRp9QEmNw0O72TpAKN9UxLkB/view" target="_blank" class="cert-card">
+      <div class="cert-logo cisco">Py</div>
+      <div class="cert-name">Python Programming</div>
+      <div class="cert-issuer">Cisco Networking Academy</div>
+    </a>
+    <a href="https://www.udemy.com/certificate/UC-bfee7245-f562-48cc-9e9b-c1c54268a925/" target="_blank" class="cert-card">
+      <div class="cert-logo ms">BI</div>
+      <div class="cert-name">Microsoft Power BI</div>
+      <div class="cert-issuer">Udemy — Data Analytics</div>
+    </a>
+    <a href="https://drive.google.com/file/d/1_Qs726jKR7wLbNdFL5hRRzptzx3aDPaj/view" target="_blank" class="cert-card">
+      <div class="cert-logo gl">SQL</div>
+      <div class="cert-name">MySQL Databases</div>
+      <div class="cert-issuer">Great Learning Academy</div>
+    </a>
+  </div>
+  <div class="ach-grid reveal">
+    <div class="ach-card"><div class="ach-icon">🏆</div><div><div class="ach-name">Discretionary Excellence Award</div><div class="ach-sub">Mahindra Comviva · 2025</div></div></div>
+    <div class="ach-card"><div class="ach-icon">⚡</div><div><div class="ach-name">Advanced Timed Coding</div><div class="ach-sub">Triplebyte · 2022</div></div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="contact-pre">06 // Let's connect</span>
+  <div class="contact-h reveal">
+    Ready to turn your<br>data into <span class="grad">decisions?</span>
+  </div>
+  <p class="contact-p reveal">Open to Data Analyst, BI Developer, and Analytics Engineer roles. Let's talk numbers.</p>
+  <div class="contact-links reveal">
+    <a href="mailto:demaguvarunreddy511@gmail.com" class="c-link email">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email
+    </a>
+    <a href="https://www.linkedin.com/in/demagu-varun-reddy/" target="_blank" class="c-link linkedin">
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn
+    </a>
+    <a href="https://github.com/Varun-redd" target="_blank" class="c-link github">
+      <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub
+    </a>
+    <a href="https://www.hackerrank.com/profile/demaguvarunredd1" target="_blank" class="c-link hrank">
+      <svg viewBox="0 0 24 24"><path d="M12 0c1.285 0 9.75 4.886 10.392 6 .645 1.115.645 10.885 0 12S13.287 24 12 24C10.715 24 2.25 19.114 1.608 18 .963 16.886.963 7.116 1.608 6 2.251 4.886 10.715 0 12 0zm2.295 6.799c-.141 0-.258.115-.258.258v1.385c0 1.514-1.285 1.629-1.541 1.629h-1.311c-.257 0-1.541-.115-1.541-1.629V7.057c0-.143-.117-.258-.258-.258h-1.285c-.143 0-.258.115-.258.258v10.112c0 .143.115.258.258.258h1.285c.141 0 .258-.115.258-.258v-4.098c0-1.199 1.083-1.422 1.541-1.422h1.311c.459 0 1.541.223 1.541 1.422v4.098c0 .143.117.258.258.258h1.285c.143 0 .258-.115.258-.258V7.057c0-.143-.115-.258-.258-.258h-1.285z"/></svg>HackerRank
+    </a>
+    <a href="https://www.credly.com/users/varun-reddy.74dc7a1f/badges" target="_blank" class="c-link credly">
+      <svg viewBox="0 0 24 24"><path d="M12 0L1.5 4.5v15L12 24l10.5-4.5v-15L12 0zm0 2.25l8.25 3.563v12.374L12 21.75l-8.25-3.563V5.813L12 2.25zM12 6a6 6 0 100 12A6 6 0 0012 6zm0 1.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z"/></svg>Credly
+    </a>
+  </div>
+  <div class="contact-email reveal">
+    <a href="mailto:demaguvarunreddy511@gmail.com">demaguvarunreddy511@gmail.com</a>
+    &nbsp;·&nbsp; +91 9697200555
+  </div>
+</section>
+
+<footer>
+  <div class="footer-l">© 2025 DEMAGU VARUN REDDY · DATA ANALYST</div>
+  <div class="footer-r">Built with <span>♥</span> and data</div>
+</footer>
+
+<script>
+// SCROLL REVEAL
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 70); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// SKILL BARS
+const barObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.sbar-fill').forEach((bar, i) => {
+        setTimeout(() => { bar.style.width = bar.dataset.w + '%'; }, i * 120);
+      });
+      barObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.skill-panel').forEach(p => barObs.observe(p));
+
+// COUNTERS
+function animCount(el) {
+  const target = parseFloat(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const decimal = target % 1 !== 0;
+  const dur = 1600; const start = performance.now();
+  function step(now) {
+    const t = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    const val = target * ease;
+    el.textContent = (decimal ? val.toFixed(1) : Math.floor(val)) + suffix;
+    if (t < 1) requestAnimationFrame(step);
+    else el.textContent = (decimal ? target.toFixed(1) : target) + suffix;
+  }
+  requestAnimationFrame(step);
+}
+const countObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { animCount(e.target); countObs.unobserve(e.target); } });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
+
+// ACTIVE NAV
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--blue2)' : ''; });
+}, { passive: true });
+</script>
+</body>
+</html>
